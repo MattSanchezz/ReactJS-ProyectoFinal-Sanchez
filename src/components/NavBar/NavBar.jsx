@@ -1,22 +1,23 @@
+import CartWidget from "../CartWidget/CartWidget"
 import './NavBar.css'
-import CartWidget from '../CartWidget/CartWidget'
+import { NavLink, Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
         <header>
-            <h1>INDUMENDIENTE</h1>
+            <Link to={"/"}>
+                <img className="imgIndu" src="./././img/indumendiente.jpg" alt="Logo Indumendiente" />
+            </Link>
+            <ul>
+                <li>
+                    <NavLink to={`/categoria/2`}>Indumentaria arriba</NavLink>
+                </li>
 
-            <nav>
-                <ul>
-                    <li>Camisetas</li>
-                    <li>Pantalones</li>
-                    <li>Accesorios</li>
-                </ul>
-            </nav>
-
-            <CartWidget/>
-
-
+                <li>
+                    <NavLink to={`/categoria/3`} >Indumentaria abajo</NavLink>
+                </li>
+            </ul>
+            <CartWidget />
         </header>
     )
 }

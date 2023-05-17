@@ -1,14 +1,28 @@
-import './ItemListContainer.css'
+import { useState, useEffect } from 'react'
+import { getProductos, getProductosPorCategoria } from '../../asyncmock'
+import ItemList from '../ItemList/ItemList'
+import { useParams } from 'react-router-dom';
 
-const ItemListContainer = (props) => {
-    const imgRojo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe6DAKop9hlHmWsJiQeSrSdXIYrsx9uVS-oxZmbLwH&s"
+const ItemListContainer = () => {
+    const [productos, setProductos] = useState([]);
+
+    const {idCategoria} = useParams();
+
+    useEffect(() => {
+
+        const funcionProductos = idCategoria ? getProductosPorCategoria : getProductos;
+
+        funcionProductos(idCategoria)
+            .then(res => setProductos(res))
+            .catch(error => console.error(error))
+
+    }, [idCategoria])
+
     return (
-        <>
-        <h2 className = 'saludo' >{props.greeting}</h2>
-        <img className = 'imgRojo' src={imgRojo} alt="" />
-        </>
-        
-
+        <div>
+            <h2>Productos</h2>
+            <ItemList productos={productos} />
+        </div>
     )
 }
 
