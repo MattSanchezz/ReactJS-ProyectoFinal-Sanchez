@@ -9,7 +9,7 @@ export const CarritoProvider = ({ children }) => {
 
     console.log(carrito);
 
-    const agregarProfucto = (item, cantidad) => {
+    const agregarProducto = (item, cantidad) => {
         if (!yaEstaEnCarrito(item.id)) {
             setCarrito(prev => [...prev, { item, cantidad }])
 
@@ -22,7 +22,7 @@ export const CarritoProvider = ({ children }) => {
     }
 
     const eliminarProducto = (id) => {
-        const carritoActualizado = carrito.filter(prod => prod.id !== id);
+        const carritoActualizado = carrito.filter(prod => prod.item.id !== id);
         setCarrito(carritoActualizado);
     }
 
@@ -31,7 +31,7 @@ export const CarritoProvider = ({ children }) => {
     }
 
     return (
-        <CarritoContext.Provider value={{ carrito, agregarProfucto, eliminarProducto, vaciarCarrito }}>
+        <CarritoContext.Provider value={{ carrito, agregarProducto, eliminarProducto, vaciarCarrito }}>
             {children}
         </CarritoContext.Provider>
     )
