@@ -1,3 +1,9 @@
 .imgCarrito{
     width: 4rem;
 }
+
+.itemsIndicador{
+    font-size: 3rem;
+    font-weight: lighter;
+    color: green;
+}

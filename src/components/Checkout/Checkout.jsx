@@ -1,7 +1,8 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useContext } from "react"
 import { CarritoContext } from "../../context/CarritoContext"
 import { db } from "../../services/config"
-import { collection, abbDoc, addDoc } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
+import './Checkout.css';
 
 const Checkout = () => {
     const { carrito, vaciarCarrito } = useContext(CarritoContext);
@@ -54,7 +55,7 @@ const Checkout = () => {
     return (
         <div>
             <h2>Checkout</h2>
-            <form onSubmit={manejadorSubmit}>
+            <form onSubmit={manejadorSubmit} className="formulario">
                 {carrito.map(producto => (
                     <div key={producto.item.id}>
                         <p>{producto.item.nombre} x {producto.cantidad} </p>
@@ -64,27 +65,27 @@ const Checkout = () => {
                 ))}
                 <hr />
 
-                <div>
+                <div className="form-group">
                     <label htmlFor=""> Nombre </label>
                     <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label htmlFor=""> Apellido </label>
                     <input type="text" value={apellido} onChange={(e) => setApellido(e.target.value)} />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label htmlFor=""> Telefono </label>
                     <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label htmlFor=""> Email </label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label htmlFor=""> Repetir Email para confirmar </label>
                     <input type="email" value={emailConfirmacion} onChange={(e) => setEmailConfirmacion(e.target.value)} />
                 </div>
@@ -93,11 +94,11 @@ const Checkout = () => {
                     error && <p> {error} </p>
                 }
 
-                <button type="submit"> Finalizar orden </button>
+                <button className="miBtn" type="submit"> Finalizar orden </button>
 
                 {
                     ordenId && (
-                        <strong> Felicidades! Tu compra ha sido realizada con exito. Este es tu nro de Orden: {ordenId} </strong>
+                        <strong className="orderId"> Felicidades! Tu compra ha sido realizada con exito. Este es tu nro de Orden: {ordenId} </strong>
                     )
                 }
             </form>
